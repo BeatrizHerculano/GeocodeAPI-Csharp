@@ -1,0 +1,50 @@
+CREATE DATABASE DB_GEOCODEAPI
+
+USE DB_GEOCODEAPI
+
+
+CREATE TABLE TB_GEOCODE(
+COD INT PRIMARY KEY IDENTITY(1,1),
+FORMATED_ADDRESS VARCHAR(200),
+LAT VARCHAR(30),
+LONG VARCHAR(30)
+)
+
+INSERT INTO TB_GEOCODE VALUES('av. paulista, 324','-125.365','125.3652')
+SELECT * FROM TB_GEOCODE
+
+-----------------------------------------------------------------------------------------
+
+CREATE PROCEDURE uspCONSULTAR_GERAL
+
+@COD INT
+
+AS
+BEGIN
+
+	SELECT * FROM TB_GEOCODE where COD = @COD
+
+END
+
+
+EXEC uspCONSULTAR_GERAL 3
+
+-------------------------------------------------------------------------------------
+
+CREATE PROCEDURE uspCADASTRAR_GERAL
+
+@FORMATED_ADDRESS VARCHAR(200),
+@LAT VARCHAR(30),
+@LONG VARCHAR(30)
+
+AS
+BEGIN
+
+	INSERT INTO TB_GEOCODE VALUES(@FORMATED_ADDRESS,@LAT,@LONG)
+
+END
+
+EXEC uspCADASTRAR_GERAL 'RUA GOIAS','-2345,234','12.23222'
+
+------------------------------------------------------------------------------
+
